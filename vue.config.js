@@ -39,7 +39,7 @@ module.exports = {
     // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8080',
+        target: 'http://127.0.0.1:9090',
         changeOrigin: true,
         // ws: true,
         pathRewrite: {

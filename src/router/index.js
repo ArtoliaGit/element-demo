@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 /* Layout */
-// import Layout from '@/views/layout/Layout'
+import Layout from '@/views/layout/Layout'
 
 /** note: submenu only apppear when children.length>=1
 *   detail see  https://panjiachen.github.io/vue-element-admin-site/#/router-and-nav?id=sidebar
@@ -25,7 +25,18 @@ Vue.use(Router)
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'), hidden: true }
+  { path: '/login', component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'), hidden: true },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'dashboard',
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index'),
+      name: 'dashboard',
+      meta: { title: '首页', icon: 'fa fa-tachometer', noCache: true }
+    }]
+  }
 ]
 
 export default new Router({
@@ -35,5 +46,18 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-
+  {
+    path: '/charts',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'charts',
+    meta: {
+      title: '测试',
+      icon: 'fa fa-list'
+    },
+    children: [
+      { path: 'test', component: () => import('@/views/test/test'), name: 'test', meta: { title: '测试', noCache: true, roles: ['admin'] }},
+      { path: 'test2', component: () => import('@/views/test/test'), name: 'test2', meta: { title: '测试2', noCache: true, roles: ['editor'] }}
+    ]
+  }
 ]

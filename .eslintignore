@@ -3,3 +3,5 @@ src/permission.js
 src/router/index.js
 src/store/modules/user.js
 src/utils/index.js
+validate.js
+config/env.js
